@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+:root {
+  --color-luxury-navy: #0A0F1E;
+  --color-luxury-surface: #0E1628;
+  --color-luxury-gold-dark: #C9A84C;
+  --color-luxury-gold: #E8C96A;
+  --color-luxury-gold-light: #F4E3A4;
+  --color-luxury-offwhite: #F5F2ED;
+  --color-luxury-muted: rgba(245, 239, 230, 0.55);
+  --glass-bg: rgba(14, 22, 40, 0.7);
+  --glass-border: rgba(201, 168, 76, 0.15);
+  --glass-heavy-bg: rgba(10, 15, 30, 0.85);
+  --glass-heavy-border: rgba(201, 168, 76, 0.2);
+  --glass-pill-bg: rgba(201, 168, 76, 0.08);
+  --glass-pill-border: rgba(201, 168, 76, 0.25);
+}
+
+:root.light-mode {
+  --color-luxury-navy: #FCFAF6;        /* Alabaster Warm Ivory background */
+  --color-luxury-surface: #F5EFEB;     /* Elegant luxury light card backgrounds */
+  --color-luxury-gold-dark: #8C6F23;   /* High-contrast dark bronze/gold for readable text */
+  --color-luxury-gold: #A3842C;        /* Mid-toned brand gold */
+  --color-luxury-gold-light: #C9A84C;  /* Lighter gold accent */
+  --color-luxury-offwhite: #1C150C;    /* Rich custom charcoal core text */
+  --color-luxury-muted: rgba(28, 21, 12, 0.65); /* Elegant readable secondary text */
+  --glass-bg: rgba(245, 239, 235, 0.75);
+  --glass-border: rgba(163, 132, 44, 0.18);
+  --glass-heavy-bg: rgba(252, 250, 246, 0.9);
+  --glass-heavy-border: rgba(163, 132, 44, 0.25);
+  --glass-pill-bg: rgba(163, 132, 44, 0.08);
+  --glass-pill-border: rgba(163, 132, 44, 0.22);
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-luxury-navy: var(--color-luxury-navy);
+  --color-luxury-surface: var(--color-luxury-surface);
+  --color-luxury-gold-dark: var(--color-luxury-gold-dark);
+  --color-luxury-gold: var(--color-luxury-gold);
+  --color-luxury-gold-light: var(--color-luxury-gold-light);
+  --color-luxury-offwhite: var(--color-luxury-offwhite);
+  --color-luxury-muted: var(--color-luxury-muted);
+}
+
+/* Base resets & custom animations */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--color-luxury-navy);
+  color: var(--color-luxury-offwhite);
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--color-luxury-navy);
+  color: var(--color-luxury-offwhite);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0F1E;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A84C;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E8C96A;
+}
+
+/* Clean animation helpers */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.05);
+  }
+}
+
+.radial-gold-glow {
+  background: radial-gradient(circle, rgba(232, 201, 106, 0.12) 0%, rgba(10, 15, 30, 0) 70%);
+  animation: pulseGlow 10s ease-in-out infinite;
+}
+
+/* Frosted Glass Utilities */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.glass-pill {
+  background: var(--glass-pill-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-pill-border);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.glass-heavy {
+  background: var(--glass-heavy-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-heavy-border);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.gold-text {
+  background: linear-gradient(135deg, #C9A84C 0%, #E8C96A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-bg {
+  background: linear-gradient(135deg, #C9A84C 0%, #E8C96A 100%);
+}
+
+.gold-border {
+  border: 1px solid rgba(201, 168, 76, 0.35);
+}
+
+/* Base Theme Transition Support */
+*, ::before, ::after {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 400ms;
+}
+
+/* Ensure motion animations are not affected by global transition */
+.motion-safe-transition {
+  transition-property: color, background-color, border-color !important;
+}
+
+/* Light Mode specific element overrides for elite readability */
+.light-mode ::-webkit-scrollbar-track {
+  background: #FCFAF6;
+}
+.light-mode ::-webkit-scrollbar-thumb {
+  background: #C9A84C;
+}
+.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: #8C6F23;
+}
+
+/* Luxury Shimmer Loading Keyframe & Utility */
+@keyframes luxuryShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.luxury-shimmer {
+  background: linear-gradient(
+    110deg,
+    var(--color-luxury-surface) 30%,
+    rgba(232, 201, 106, 0.18) 50%,
+    var(--color-luxury-surface) 70%
+  );
+  background-size: 200% 100%;
+  animation: luxuryShimmer 2.0s infinite linear;
+}
+
+.light-mode .luxury-shimmer {
+  background: linear-gradient(
+    110deg,
+    var(--color-luxury-surface) 30%,
+    rgba(163, 132, 44, 0.22) 50%,
+    var(--color-luxury-surface) 70%
+  );
+  background-size: 200% 100%;
+  animation: luxuryShimmer 2.0s infinite linear;
+}
+
+
+
